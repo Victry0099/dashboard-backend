@@ -2,40 +2,18 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     const allowedOrigins = [process.env.FRONTEND_URL].filter(Boolean);
-
-//     // Allow requests with no origin (like mobile apps or curl requests)
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-//   allowedHeaders: [
-//     "Content-Type",
-//     "Authorization",
-//     "X-Requested-With",
-//     "Accept",
-//     "Origin",
-//   ],
-//   exposedHeaders: ["Content-Range", "X-Content-Range"],
-//   credentials: true,
-//   maxAge: 86400, // 24 hours
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-// };
-
 const corsOptions = {
   origin: function (origin, callback) {
-    const allowedOrigins = [process.env.FRONTEND_URL].filter(Boolean);
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
 
-    // Allow requests with no origin (e.g., mobile apps or curl)
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      "http://localhost:5173",
+    ].filter(Boolean);
+
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log("Blocked by CORS:", origin); // For debugging
       callback(new Error("Not allowed by CORS"));
     }
   },
@@ -49,7 +27,7 @@ const corsOptions = {
   ],
   exposedHeaders: ["Content-Range", "X-Content-Range"],
   credentials: true,
-  maxAge: 86400, // 24 hours
+  maxAge: 86400,
   optionsSuccessStatus: 204,
 };
 

@@ -1,4 +1,3 @@
-// app.js
 import express from "express";
 import cors from "cors";
 import { createServer } from "http";
@@ -12,12 +11,13 @@ import { ensureTasksTableExists } from "./models/createDb.js";
 const app = express();
 const server = createServer(app);
 
-//create table if not extists
+// Create table if not exists
 ensureTasksTableExists();
-// reset database
 
-// Middleware
-app.options(cors(corsOptions));
+// CORS middleware should be one of the first middleware
+app.use(cors(corsOptions));
+
+// Other middleware
 app.use(express.json({ limit: "10kb" }));
 setupSecurity(app);
 
