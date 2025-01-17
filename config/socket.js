@@ -1,6 +1,7 @@
 // backend/config/socket.js
 import { Server } from "socket.io";
-
+import dotenv from "dotenv";
+dotenv.config;
 let io;
 
 export const initSocket = (server) => {
