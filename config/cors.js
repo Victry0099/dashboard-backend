@@ -1,11 +1,12 @@
 //config/cors.js
+import dotenv from "dotenv";
+dotenv.config();
 
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       process.env.FRONTEND_URL,
-      "http://localhost:5173",
-      "http://127.0.0.1:5173",
+      "https://dashboard-backend-5a4o.onrender.com",
     ].filter(Boolean);
 
     // Allow requests with no origin (like mobile apps or curl requests)

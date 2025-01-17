@@ -9,6 +9,13 @@ export const initSocket = (server) => {
       origin: process.env.FRONTEND_URL,
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "Accept",
+        "Origin",
+      ],
     },
   });
 
